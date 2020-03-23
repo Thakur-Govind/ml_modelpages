@@ -1,7 +1,8 @@
 <h1> Input Parameters</h1>
-<h2> If you selected the LinearRegression model, you neednt put anything</h2>
+<h2> If you selected the LinearRegression model, you neednt put anything. Just click the submit button!</h2>
 <form action  = "/model//{{model_id}}" method = "POST">
 {% csrf_token %}
+{% if name != 'Linear Regression' %}
 Parameter 1: {{par1}}<br>
 <input type = "text" name = "parameter1">
 <br>
@@ -10,5 +11,6 @@ Parameter 2: {{par2}}<br>
 <input type = "text" name = "parameter2">
 <br>
 <br>
+{% endif %}
 <button type = "submit"> Submit </button>
 </form>

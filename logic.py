@@ -4,6 +4,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+import numpy as np
+import pandas as pd
 def X_y_sep(alpha, X, y):
     X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = alpha, random_state = 42)
     return X_train,X_test,y_train,y_test
@@ -33,3 +35,11 @@ def rf_ml(alpha, X, y, n_comps, max_d, min_s_s):
     return labels, y_test
 def acc(y,y_test):
     return accuracy_score(y,y_test)
+def get_data(file):
+    df = pd.read_csv(file)
+    a = list(df.columns)
+    a.remove('Unnamed: 0')
+    a.remove('Admit')
+    X = df[a]
+    y = df['Admit']
+    return (X,y)

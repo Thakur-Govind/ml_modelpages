@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from .models import mlmodels
-from logic import X_y_sep, svc_ml, acc, lr_ml, dt_ml, rf_ml
+from logic import X_y_sep, svc_ml, acc, lr_ml, dt_ml, rf_ml,get_data
 import numpy as np
 # Create your views here.
 def home(request):
@@ -29,13 +29,14 @@ def params(request, ml_id):
         par2_name = "Minimum Samples-Split in a Tree"
     model.save()
 
-    return render( request, 'mlmodels/ml_params.html', {'par1':par1_name, 'par2': par2_name, 'model_id': ml_id})
+    return render( request, 'mlmodels/ml_params.html', {'par1':par1_name, 'par2': par2_name, 'model_id': ml_id, 'name':model.name})
 
 #def test(request):
     return render()
 def mlexec(request, ml_id):
     model = get_object_or_404(mlmodels, pk = ml_id)
     #out=[]
+    X,y = get_data('lr.csv') #to be updated
     if(ml_id == 1):
         if model.para1 == '"' or model.para2 == '""':
             p1 = 0.6 if model.para1 == '""' else model.para1
@@ -43,13 +44,13 @@ def mlexec(request, ml_id):
         else:
             p1 = float(model.para1)
             p2 = int(model.para2)
-        out,y_test = svc_ml(0.2, np.array([1,2,3,6,3,8,9,10,7,7,4]).reshape(-1,1),[1,0,1,0,1,0,1,1,0,0,1], p1,p2)
+        out,y_test = svc_ml(0.2,X,y, p1,p2)
         ac = acc(out,y_test)
 
 
     elif ml_id == 2:
         model = get_object_or_404(mlmodels, pk = ml_id)
-        out,y_test = lr_ml(0.2, np.array([1,2,3,6,11,8,9,10,7,7]).reshape(-1,1),[1,0,1,0,1,0,1,1,0,0])
+        out,y_test = lr_ml(0.2,X,y)
         ac = acc(out, y_test)
 
 
@@ -61,7 +62,7 @@ def mlexec(request, ml_id):
             p1 = float(model.para1)
             p2 = int(model.para2)
         model = get_object_or_404(mlmodels, pk = ml_id)
-        out,y_test = dt_ml(0.2, np.array([1,2,3,6,11,8,9,10,7,12,5,4]).reshape(-1,1),[1,0,1,0,1,0,1,1,0,0,1,1], p1,p2)
+        out,y_test = dt_ml(0.2, X, y, p1,p2)
         ac = acc(out, y_test)
 
     elif ml_id == 4:

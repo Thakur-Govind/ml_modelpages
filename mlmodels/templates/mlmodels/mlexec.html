@@ -1,6 +1,80 @@
-<h1> Hey, you made it here!</h1>
+<!doctype html>
+<html lang="en">
+<head>
+  {% load staticfiles %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Output of the model</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'mlhome' %}">Go Back</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          <a class="nav-item nav-link" href="https://www.linkedin.com/in/govind-thakur-494a394a/">LinkedIn</a>
+            <a class="nav-item nav-link" href="https://github.com/Thakur-Govind">GitHub</a>
+            <a class="nav-item nav-link" href="mailto:govind.thakur11@gmail.com">Mail</a>
+            <a class="nav-item nav-link" href="https://drive.google.com/file/d/1TF0OUCmqjxHWE0ibXmj1pFeXAMYXJLRI/view?usp=sharing">Resume</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main role="main">
+
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading"> Hey, you made it here!</h1>
+        <p class="lead text-muted">  The model you chose was <b>{{ model.name }}</b>,</p>
+      </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+          {% if model.name != 'Linear Regression' %}
+          <p> With the parameters:{{para1}},{{para2}}</p>
+          {% endif %}
+          And so,<br>
+          The result is {{ output }},<br>
+          With:
+          <ul>
+            <li>an accuracy score of <b> {{ accuracy }} </b>
+            <li>an f1 score of <b> {{ fscore }} </b>
+            <li>an f-beta score (beta ->0) of <b> {{ fbeta_l }} </b>
+            <li>an f-beta score(beta >1) of <b> {{ fbeta_h }} </b>
+          </ul>
+            <br>
+        </div>
+      </div>
+  </main>
+  <footer class="text-muted">
+    <div class="container text-center">
+      <p>© Govind Thakur {% now "Y" %}</p>
+      </div>
+  </footer>
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+<h1></h1>
 <br />
 <br />
-The model you chose was {{ model.name }}
-<br />
-The result is {{ output }}, with an accuracy of {{ accuracy }}
+<p>
+<br>

@@ -62,10 +62,39 @@
           </div>
           {% endfor %}
 
-
         </div>
       </div>
+      <section class="jumbotron text-center">
+       <h3 class="jumbotron-heading">History of training models</h3 >
+       </section>
+      <div class="container">
+       <table >
+         <tr>
+           <th>Model Name</th>
+           <th>Dataset</th>
+           <th>Parameter 1</th>
+           <th>Parameter 2</th>
+           <th>Accuracy</th>
+           <th>F score</th>
+           <th>Beta low</th>
+           <th>Beta high</th>
+         </tr>
+        </tr>
+        {% for entry in entries.all %}
+         <tr>
+           <td>{{ entry.m_name }}</td>
+           <td>{{ entry.dataset_name }}</td>
+           <td>{{ entry.m_para1 }}</td>
+           <td>{{ entry.m_para2 }}</td>
+           <td>{{ entry.accuracy }}</td>
+           <td>{{ entry.f_score }}</td>
+           <td>{{ entry.f_b_l_score }}</td>
+           <td>{{ entry.f_b_h_score }}</td>
+         </tr>
+        {% endfor %}
+      </table>
     </div>
+  </div>
 
   </main>
 

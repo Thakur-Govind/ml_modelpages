@@ -53,6 +53,15 @@
         <br>
         <br>
         {% endif %}
+        Dataset:<br>
+        <select name="dataset" class="form-control">
+          {% for dt in data.all %}
+          <option value="{{ dt.d_fname }}:{{ dt.d_name }}">{{ dt.d_name }}</option>
+          {% endfor %}
+        </select>
+        <br>
+        <input type = "text" name = "test_size" placeholder="enter size of testing set">
+        <br>
         <button type = "submit"> Submit </button>
         </form>
         </div>

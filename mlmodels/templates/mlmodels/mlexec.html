@@ -43,19 +43,69 @@
     <div class="album py-5 bg-light">
       <div class="container">
           {% if model.name != 'Linear Regression' %}
-          <p> With the parameters:{{para1}},{{para2}}</p>
+          <p> With the parameters:{{para1}},  {{para2}}</p>
           {% endif %}
+          The testing set size as: <b>{{ test }}</b> <br>
           And so,<br>
           The result is {{ output }},<br>
           With:
           <ul>
+            {% if accuracy != -1.00 %}
             <li>an accuracy score of <b> {{ accuracy }} </b>
             <li>an f1 score of <b> {{ fscore }} </b>
             <li>an f-beta score (beta ->0) of <b> {{ fbeta_l }} </b>
             <li>an f-beta score(beta >1) of <b> {{ fbeta_h }} </b>
+            {% endif %}
+            {% if r2 != -1.00 %}
+            <li>an R-2 score of <b> {{ r2 }} </b>
+            {% endif %}
           </ul>
             <br>
         </div>
+        <section class="jumbotron text-center">
+         <h3 class="jumbotron-heading">Previously trained on this dataset:</h3 >
+         </section>
+        <div class="container">
+         <table >
+           <tr>
+             <th>Model Name</th>
+             <th>Parameter 1</th>
+             <th>Parameter 2</th>
+             <th>Accuracy</th>
+             <th>F score</th>
+             <th>Beta low</th>
+             <th>Beta high</th>
+             <th>R2 Score</th>
+           </tr>
+          </tr>
+          {% for entry in entries.all %}
+           <tr>
+             <td>{{ entry.m_name }}</td>
+             <td>{{ entry.m_para1 }}</td>
+             <td>{{ entry.m_para2 }}</td>
+             {% if entry.accuracy == -1.00 %}
+             <td>NA</td>
+             <td>NA</td>
+             <td>NA</td>
+             <td>NA</td>
+             {% else %}
+             <td>{{ entry.accuracy }}</td>
+             <td>{{ entry.f_score }}</td>
+             <td>{{ entry.f_b_l_score }}</td>
+             <td>{{ entry.f_b_h_score }}</td>
+             {% endif %}
+             {% if entry.r_2_score == -1.00 %}
+             <td>NA</td>
+             {% else %}
+             <td>{{ entry.r_2_score }}</td>
+             {% endif %}
+           </tr>
+          {% endfor %}
+          <tr>
+            <td><i> (Just executed) </i></td>
+          </tr>
+        </table>
+      </div>
       </div>
   </main>
   <footer class="text-muted">

@@ -78,6 +78,7 @@
            <th>F score</th>
            <th>Beta low</th>
            <th>Beta high</th>
+           <th>R2 Score</th>
          </tr>
         </tr>
         {% for entry in entries.all %}
@@ -86,10 +87,22 @@
            <td>{{ entry.dataset_name }}</td>
            <td>{{ entry.m_para1 }}</td>
            <td>{{ entry.m_para2 }}</td>
+           {% if entry.accuracy == -1.00 %}
+           <td>NA</td>
+           <td>NA</td>
+           <td>NA</td>
+           <td>NA</td>
+           {% else %}
            <td>{{ entry.accuracy }}</td>
            <td>{{ entry.f_score }}</td>
            <td>{{ entry.f_b_l_score }}</td>
            <td>{{ entry.f_b_h_score }}</td>
+           {% endif %}
+           {% if entry.r_2_score == -1.00 %}
+           <td>NA</td>
+           {% else %}
+           <td>{{ entry.r_2_score }}</td>
+           {% endif %}
          </tr>
         {% endfor %}
       </table>
